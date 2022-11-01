@@ -4,10 +4,7 @@
 const arr1 = [9, 2, 40, 800, 1, 20]; // min 1, max 800
 
 function findMinAndMaxInArray(arg) {
-    function sortingArray(a, b) {
-        return a - b;
-    }
-    const sortedArray = arg.sort(sortingArray)
+    const sortedArray = arg.sort((a, b) => a - b)
 
     return 'min ' + sortedArray[0] + ' && max ' + sortedArray[sortedArray.length - 1]
 }
@@ -56,11 +53,7 @@ const arr4 = [3, 4, 3, 4, 3, 3, 4, 4, 6, 7, 8, 8, 8, 8] // [3, 4, 6, 7, 8]
 
 // elegant solution
 function uniqElementsInArray(arg) {
-    function sortingArray(a, b) {
-        return a - b;
-    }
-
-    arg.sort(sortingArray) // sort array for the next changes
+    arg.sort((a, b) => a - b) // sort array for the next changes
 
     const deleteThisIndex = [] //array for repeating indexes
 
@@ -78,17 +71,14 @@ function uniqElementsInArray(arg) {
 
 // new Set()
 function uniqElementsInArray2(arg) {
+
     return [...new Set(arg)]
 }
 
 // filter
 function uniqElementsInArray3(arg) {
-    function sortingArray(a, b) {
-        return a - b;
-    }
-    arg.sort(sortingArray)
 
-    return arg.filter((el, index) => el !== arg[index + 1])
+    return arg.sort((a, b) => a - b).filter((el, index) => el !== arg[index + 1])
 }
 
 //========================================================================================

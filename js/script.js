@@ -1,66 +1,111 @@
 //EASY
+
 // 1 - Write a function to find the min and max elements in the array.
 const arr1 = [9, 2, 40, 800, 1, 20]; // min 1, max 800
 
-function findMinAndMaxInArray(arr1) {
+function findMinAndMaxInArray(arg) {
     function sortingArray(a, b) {
         return a - b;
     }
-    const sortedArray = arr1.sort(sortingArray)
+    const sortedArray = arg.sort(sortingArray)
 
     return 'min ' + sortedArray[0] + ' && max ' + sortedArray[sortedArray.length - 1]
 }
+
+//========================================================================================
 
 // 2 - Write a function to find the sum of the array elements.
 const arr2 = [5, 50, 55, 105, 15, 70] //sum 300
 
 // solution 1
-function sumArray(arr2) {
+function sumArray(arg) {
     let sum = 0;
-    arr2.forEach(el => {
+    arg.forEach(el => {
         sum += el
     });
     return sum
 }
 
 // solution 2 (I know about method reduce, but need to google syntax)
-function sumArray2(arr2) {
-    return arr2.reduce((a, b) => a + b)
+function sumArray2(arg) {
+    return arg.reduce((a, b) => a + b)
 }
+
+//========================================================================================
 
 // 3 - Write a function to reverse for work with string.
 const string1 = 'qwerty'
 
-function reverseString(string1) {
-    return string1.split('').reverse().join('')
+function reverseString(arg) {
+    return arg.split('').reverse().join('')
 }
+
+//========================================================================================
 
 // 4 - Write a function to return the index of the input element or -1 if the element is not found.
 const arr3 = [1, 2, '3', 'qwerty', undefined, 'null', null, 'undefined', true, false]
 
-function indexOfElement(element) {
-    return arr3.indexOf(element)
+function indexOfElement(arg) {
+    return arr3.indexOf(arg)
 }
 
-// TODO: 5 - Function accepts an array with digits and return a new array that contains only unique elements from the original array.
+//========================================================================================
+
+// 5 - Function accepts an array with digits and return a new array that contains only unique elements from the original array.
 const arr4 = [3, 4, 3, 4, 3, 3, 4, 4, 6, 7, 8, 8, 8, 8] // [3, 4, 6, 7, 8]
 
-function uniqElementsInArray(arr4) {
+// elegant solution
+function uniqElementsInArray(arg) {
+    function sortingArray(a, b) {
+        return a - b;
+    }
 
-    return arr4
+    arg.sort(sortingArray) // sort array for the next changes
+
+    const deleteThisIndex = [] //array for repeating indexes
+
+    //find repeating indexes
+    arg.forEach((el, index) => {
+        if (el === arg[index + 1]) {
+            deleteThisIndex.push(index + 1)
+        }
+    })
+
+    deleteThisIndex.reverse().forEach(el => arg.splice(el, 1))
+
+    return arg
 }
+
+// new Set()
+function uniqElementsInArray2(arg) {
+    return [...new Set(arg)]
+}
+
+// filter
+function uniqElementsInArray3(arg) {
+    function sortingArray(a, b) {
+        return a - b;
+    }
+    arg.sort(sortingArray)
+
+    return arg.filter((el, index) => el !== arg[index + 1])
+}
+
+//========================================================================================
 
 // 6 - Realize function which returns the quantity of odd/even digits in array.
 const arr5 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 
-function oddEvenCount(arr5) {
+function oddEvenCount(arg) {
     let odd = 0
     let even = 0
 
-    arr5.forEach(el => el % 2 === 0 ? even++ : odd++)
+    arg.forEach(el => el % 2 === 0 ? even++ : odd++)
 
     return 'count of even: ' + even + ', odd: ' + odd
 }
+
+//========================================================================================
 
 // 7 - Return the index of 'a' in the string or the array of indexes. 
 const string2 = 'qwertypop'

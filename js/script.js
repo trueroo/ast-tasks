@@ -17,14 +17,14 @@ const arr2 = [5, 50, 55, 105, 15, 70] //sum 300
 // solution 1
 function sumArray(arg) {
     let sum = 0;
-    arg.forEach(el => {
-        sum += el
-    });
+    arg.forEach(el => sum += el)
+
     return sum
 }
 
-// solution 2 (I know about method reduce, but need to google syntax)
+// solution 2
 function sumArray2(arg) {
+
     return arg.reduce((a, b) => a + b)
 }
 
@@ -34,6 +34,7 @@ function sumArray2(arg) {
 const string1 = 'qwerty'
 
 function reverseString(arg) {
+
     return arg.split('').reverse().join('')
 }
 
@@ -43,6 +44,7 @@ function reverseString(arg) {
 const arr3 = [1, 2, '3', 'qwerty', undefined, 'null', null, 'undefined', true, false]
 
 function indexOfElement(arg) {
+
     return arr3.indexOf(arg)
 }
 
@@ -103,9 +105,11 @@ const string2 = 'qwertypop'
 function indexInString(arg) {
     let index = -1;
     let result = []
+
     while ((index = string2.indexOf(arg, index + 1)) != -1) {
         result.push(index)
     }
+
     return result.length === 0 ? 'not match'
         : result.length === 1 ? result[0] : result
 }
@@ -115,6 +119,7 @@ function indexInString(arg) {
 // 1 - Write a function to archive a string. 
 // Input: aaaadttaggaa 
 // Output:a4d1t2q3a2
+
 
 // 2.1 - Sort received string by the number of the letters. 
 // Input: a4d1t2q3 

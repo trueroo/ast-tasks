@@ -1,93 +1,66 @@
 //EASY
 
 // 1 - Write a function to find the min and max elements in the array.
-const arr1 = [9, 2, 40, 800, 1, 20]; // min 1, max 800
-
-function findMinAndMaxInArray(arg) {
-    const sortedArray = arg.sort((a, b) => a - b)
+function findMinAndMaxInArray(arr) {
+    const sortedArray = arr.sort((a, b) => a - b)
 
     return 'min ' + sortedArray[0] + ' && max ' + sortedArray[sortedArray.length - 1]
 }
 
-//========================================================================================
-
 // 2 - Write a function to find the sum of the array elements.
-const arr2 = [5, 50, 55, 105, 15, 70] //sum 300
-
 // solution 1
-function sumArray(arg) {
+function sumArray(arr) {
     let sum = 0;
     arg.forEach(el => sum += el)
-
+    
     return sum
 }
 
 // solution 2
-function sumArray2(arg) {
-
-    return arg.reduce((a, b) => a + b)
+function sumArray2(arr) {
+    return arr.reduce((a, b) => a + b)
 }
-
-//========================================================================================
 
 // 3 - Write a function to reverse for work with string.
-const string1 = 'qwerty'
-
-function reverseString(arg) {
-
-    return arg.split('').reverse().join('')
+function reverseString(str) {
+    return str.split('').reverse().join('')
 }
-
-//========================================================================================
 
 // 4 - Write a function to return the index of the input element or -1 if the element is not found.
-const arr3 = [1, 2, '3', 'qwerty', undefined, 'null', null, 'undefined', true, false]
-
-function indexOfElement(arg) {
-
-    return arr3.indexOf(arg)
+function indexOfElement(arr, element) {
+    return arr.indexOf(element)
 }
 
-//========================================================================================
-
 // 5 - Function accepts an array with digits and return a new array that contains only unique elements from the original array.
-const arr4 = [3, 4, 3, 4, 3, 3, 4, 4, 6, 7, 8, 8, 8, 8] // [3, 4, 6, 7, 8]
-
 // elegant solution
-function uniqElementsInArray(arg) {
-    arg.sort((a, b) => a - b) // sort array for the next changes
+function uniqElementsInArray(arr) {
+    const uniqArr = arr.sort((a, b) => a - b) // sort array for the next changes
 
     const deleteThisIndex = [] //array for repeating indexes
 
     //find repeating indexes
-    arg.forEach((el, index) => {
-        if (el === arg[index + 1]) {
+    uniqArr.forEach((el, index) => {
+        if (el === uniqArr[index + 1]) {
             deleteThisIndex.push(index + 1)
         }
     })
 
-    deleteThisIndex.reverse().forEach(el => arg.splice(el, 1))
+    deleteThisIndex.reverse().forEach(el => uniqArr.splice(el, 1))
 
-    return arg
+    return uniqArr
 }
 
 // new Set()
 function uniqElementsInArray2(arg) {
-
     return [...new Set(arg)]
 }
 
 // filter
 function uniqElementsInArray3(arg) {
-
     return arg.sort((a, b) => a - b).filter((el, index) => el !== arg[index + 1])
 }
 
-//========================================================================================
-
 // 6 - Realize function which returns the quantity of odd/even digits in array.
-const arr5 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-
 function oddEvenCount(arg) {
     let odd = 0
     let even = 0
@@ -97,11 +70,7 @@ function oddEvenCount(arg) {
     return 'count of even: ' + even + ', odd: ' + odd
 }
 
-//========================================================================================
-
 // 7 - Return the index of 'a' in the string or the array of indexes. 
-const string2 = 'qwertypop'
-
 function indexInString(arg) {
     let index = -1;
     let result = []
@@ -118,49 +87,196 @@ function indexInString(arg) {
 //MAINTASKS
 // 1 - Write a function to archive a string. 
 // Input: aaaadttaggaa 
-// Output:a4d1t2q3a2
+// Output: a4d1t2a1g2a2
+function archiveString(str) {
+    let counter = 1
+    const archiveString = []
 
-
-// 2.1 - Sort received string by the number of the letters. 
+    str.split('').forEach((el, index) => {
+        if (el === str[index + 1]) {
+            counter++
+        } else {
+            archiveString.push(el)
+            archiveString.push(counter)
+            counter = 1
+        }
+    })
+    return archiveString.join('')
+}
+// 2.1 - Sort received string by the number of the letters. TODO:
 // Input: a4d1t2q3 
 // Output: d, t, q, a
+const string4 = 'a4d1t2q3'
 
-// 2 - Write a function to unarchive the string. 
+function sortString(str) {
+    // a4 d1 t2 q3
+    return str.split(/\b[a-zA-Z][1-9]\b/ig)
+}
+
+// 2 - Write a function to unarchive the string. TODO:
 // Input: b3c4г2h6 
 // Output: bbbccccrrhhhhhh
+const string5 = 'b3c4r2h6'
 
-// 2.1 Find the letter with max number of repeating in the string.
+function unarchiveString(str) {
+}
+
+// 2.1 Find the letter with max number of repeating in the string. TODO:
+const string6 = 'sdfjwreicipbwqiqwbaksjhfjkewhflwkjasdjfqopwiefj'
+
+function maxRepeatingLetter(str) {
+
+}
 
 // 3 - Write a function to check if the 1st input string is a substring of the 2nd input string.
 // Input: 'sun', 'The sun is shining on the sunflowers', Return: true
+function checkSubstring(strToFind, str) {
+    return str.includes(strToFind)
+}
 
-//3.1 Optimize to return the array of indexes if the substring was found several times. 
+//3.1 Optimize to return the array of indexes if the substring was found several times. TODO:
 // Input: 'sun', 'The sun is shining on the sunflowers' 
 // Return: [4, 26]
+function checkSubstrings(strToFind, str) {
 
-// 4 - Write a function to calculate the number of words in the text.
+}
+// 4 - Write a function to calculate the number of words in the text. //modify to not count spaces!
+function countWordsInSentence(str) {
+    return str.replace(/\s+/g, ' ').split(' ').length
+}
 
 // 4.1 - To modify the function to calculate the number of the defined input word.
+function countWordsInSentence2(str, word) {
+    return str.split(word).length - 1
+}
 
 // 5 - Write a function to return the number of vowels in the input string.
+function countVowels(str) {
+    return str.match(/[aeiou]/ig).length
+}
 
-// 5.1 - What vowel was found min times.
+
+// 5.1 - What vowel was found min times. TODO:
+function minRepeatingVowels(str) {
+
+}
 
 // 6 - Write a function to return the number of consonants in the input string.
+function countConsonants(str) {
+    return str.match(/[^aeiou]/ig).length
+}
 
-// 6.1 - What consonant was found max times.
+// 6.1 - What consonant was found max times. TODO:
+function maxRepeatingConsonant(arg) {
+
+}
 
 // 7 - Write a function to define if the input year is a leap year, in case it is predefined that 2020 is a leap year.
+function leapYear(year) {
+    return year % 4 === 0
+}
 
-// 7.1 - Write a second function to define the number of days in the month by month and year. For the 2nd task, it is assumed that constant mapping (as object) will be used for all months except Feb.
+// 7.1 - Write a second function to define the number of days in the month by month and year. For the 2nd task, it is assumed that constant mapping (as object) will be used for all months except Feb. //dont understand what they want. 
+function numOfDaysInMonth(year, month) {
+    const february = 'february'
+    const evenMonths = ['april', 'june', 'august', 'october', 'december']
+    const oddMonths = ['january', 'march', 'may', 'july', 'september', 'november']
+
+    if (typeof year !== 'number') {
+        return 'Year must contain only digit(s)'
+    } else if (typeof month !== 'string') {
+        return 'Month must contain only letters'
+    }
+
+    if (year % 4 === 0 && month.toLowerCase() === february) {
+        return '29 days in ' + february
+    } else if (year % 4 !== 0 && month.toLowerCase() === february) {
+        return '28 days in ' + february
+    } else if (evenMonths.indexOf(month.toLowerCase()) !== -1) {
+        return '30 days in ' + month.toLowerCase()
+    } else if (oddMonths.indexOf(month.toLowerCase()) !== -1) {
+        return '31 days in ' + month.toLowerCase()
+    } else {
+        return 'Wrong input month'
+    }
+    //TODO: first letter must be uppercase
+}
 
 // 8 - Write a function to check if the input array is a correct Fibonacci sequence.
+function checkFibonacciSequence(arr) {
+    if (arr.length < 3) {
+        return 'Need more data'
+    }
+
+    for (i = 2; i < arr.length; i++) {
+        if ((arr[i - 1] + arr[i - 2]) !== arr[i])
+            return 'Sequence is not correct'
+    }
+    return 'Sequence is correct'
+}
 
 // 8.1 -  If it is not a correct Fibonacci sequence, the function should return the index where the sequence is interrupted.
+function checkFibonacciSequence2(arr) {
+    if (arr.length < 3) {
+        return 'Need more data'
+    }
+
+    for (i = 2; i < arr.length; i++) {
+        if ((arr[i - 1] + arr[i - 2]) !== arr[i])
+            return `Sequence is not correct. Wrong index is ${i}`
+    }
+    return 'Sequence is correct'
+}
 
 // 9 - Write a functiom to calculate factorial.
+//solution 1
+function factorial(num) {
+    let result = 1
 
-// 9.1 - Write a functiom to check if the input parametr is a factorial of any number.
+    if (num === 0) {
+        return result;
+    }
+    if (num < 0) {
+        return 'Only non-negative numbers'
+    }
+
+    for (num; num > 0; num--) {
+        result *= num
+    }
+    return result
+}
+
+//solution 2 recursion
+function factorial2(num) {
+    if (num < 0) {
+        return 'Only non-negative numbers'
+    }
+    if (num === 0) {
+        return 1;
+    }
+
+    return num * factorial2(num - 1);
+}
+
+
+// 9.1 - Write a functiom to check if the input parametr is a factorial of any number. 
+//TODO: how to make with recursion
+function checkFactorial(num, limit) {
+    if (num < 0) {
+        return 'error'
+    } else if (num === 0) {
+        return '0'
+    }
+    let result = 1
+
+    for (let i = 1; i < limit; i++) {
+        if (num === result) {
+            return i - 1
+        }
+        result *= i
+    }
+    return 'none'
+}
 
 // 10 - Write a functiom to remova all 'a' from the string and return array of indexes, where the 'a' was.
 

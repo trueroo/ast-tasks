@@ -11,14 +11,12 @@ function findMinAndMaxInArray(arr) {
 // solution 1
 function sumArray(arr) {
     let sum = 0;
-    arr.forEach(el => {
-        sum += el
-    });
-
+    arg.forEach(el => sum += el)
+    
     return sum
 }
 
-// solution 2 (I know about method reduce, but need to google syntax)
+// solution 2
 function sumArray2(arr) {
     return arr.reduce((a, b) => a + b)
 }
@@ -76,9 +74,11 @@ function oddEvenCount(arg) {
 function indexInString(arg) {
     let index = -1;
     let result = []
+
     while ((index = string2.indexOf(arg, index + 1)) != -1) {
         result.push(index)
     }
+
     return result.length === 0 ? 'not match'
         : result.length === 1 ? result[0] : result
 }

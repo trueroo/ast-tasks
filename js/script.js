@@ -12,7 +12,7 @@ function findMinAndMaxInArray(arr) {
 function sumArray(arr) {
     let sum = 0;
     arg.forEach(el => sum += el)
-    
+
     return sum
 }
 
@@ -125,7 +125,6 @@ function unarchiveString(str) {
 const string6 = 'sdfjwreicipbwqiqwbaksjhfjkewhflwkjasdjfqopwiefj'
 
 function maxRepeatingLetter(str) {
-
 }
 
 // 3 - Write a function to check if the 1st input string is a substring of the 2nd input string.
@@ -138,7 +137,6 @@ function checkSubstring(strToFind, str) {
 // Input: 'sun', 'The sun is shining on the sunflowers' 
 // Return: [4, 26]
 function checkSubstrings(strToFind, str) {
-
 }
 // 4 - Write a function to calculate the number of words in the text. //modify to not count spaces!
 function countWordsInSentence(str) {
@@ -155,10 +153,8 @@ function countVowels(str) {
     return str.match(/[aeiou]/ig).length
 }
 
-
 // 5.1 - What vowel was found min times. TODO:
 function minRepeatingVowels(str) {
-
 }
 
 // 6 - Write a function to return the number of consonants in the input string.
@@ -168,7 +164,6 @@ function countConsonants(str) {
 
 // 6.1 - What consonant was found max times. TODO:
 function maxRepeatingConsonant(arg) {
-
 }
 
 // 7 - Write a function to define if the input year is a leap year, in case it is predefined that 2020 is a leap year.
@@ -257,7 +252,6 @@ function factorial2(num) {
 
     return num * factorial2(num - 1);
 }
-
 
 // 9.1 - Write a functiom to check if the input parametr is a factorial of any number. 
 //TODO: how to make with recursion

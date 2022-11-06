@@ -2,85 +2,164 @@
 
 // 1 - Write a function to find the min and max elements in the array.
 function findMinAndMaxInArray(arr) {
-    const sortedArray = arr.sort((a, b) => a - b)
+    if (Array.isArray(arr)) {
+        if (arr.length < 2) {
+            return 'array is too short'
+        } else {
+            const sortedArray = arr.sort((a, b) => a - b)
+            return 'min ' + sortedArray[0] + ' && max ' + sortedArray[sortedArray.length - 1]
+        }
+    }
 
-    return 'min ' + sortedArray[0] + ' && max ' + sortedArray[sortedArray.length - 1]
+    return 'Only array allowed'
 }
 
 // 2 - Write a function to find the sum of the array elements.
 // solution 1
 function sumArray(arr) {
-    let sum = 0;
-    arg.forEach(el => sum += el)
+    if (Array.isArray(arr)) {
+        if (arr.length > 0) {
+            let sum = 0;
+            arr.forEach(el => sum += el)
 
-    return sum
+            return sum
+        } else {
+            return 'Array have no data to calculate'
+        }
+    }
+
+    return 'Only array allowed'
 }
 
 // solution 2
 function sumArray2(arr) {
-    return arr.reduce((a, b) => a + b)
+    if (Array.isArray(arr)) {
+        if (arr.length > 0) {
+            return arr.reduce((a, b) => a + b)
+        } else {
+            return 'Array have no data to calculate'
+        }
+    }
+
+    return 'Only array allowed'
+
 }
+
 
 // 3 - Write a function to reverse for work with string.
 function reverseString(str) {
-    return str.split('').reverse().join('')
+    if (typeof str === 'string') {
+        if (str.length > 1) {
+            return str.split('').reverse().join('')
+        } else {
+            return 'String is too short'
+        }
+    }
+
+    return 'Only string allowed'
 }
 
 // 4 - Write a function to return the index of the input element or -1 if the element is not found.
 function indexOfElement(arr, element) {
-    return arr.indexOf(element)
+    if (Array.isArray(arr)) {
+        if (arr.length > 0) {
+            return arr.indexOf(element)
+        } else {
+            return 'Array have no data'
+        }
+    }
+
+    return 'Only array allowed'
 }
 
 // 5 - Function accepts an array with digits and return a new array that contains only unique elements from the original array.
 // elegant solution
 function uniqElementsInArray(arr) {
-    const uniqArr = arr.sort((a, b) => a - b) // sort array for the next changes
+    if (Array.isArray(arr)) {
+        if (arr.length <= 1) {
+            return arr
+        } else {
+            const uniqArr = arr.sort((a, b) => a - b) // sort array for the next changes
+            const deleteThisIndex = [] //array for repeating indexes
 
-    const deleteThisIndex = [] //array for repeating indexes
+            uniqArr.forEach((el, index) => {
+                if (el === uniqArr[index + 1]) {
+                    deleteThisIndex.push(index + 1)
+                }
+            })
+            deleteThisIndex.reverse().forEach(el => uniqArr.splice(el, 1))
 
-    //find repeating indexes
-    uniqArr.forEach((el, index) => {
-        if (el === uniqArr[index + 1]) {
-            deleteThisIndex.push(index + 1)
+            return uniqArr
         }
-    })
+    }
 
-    deleteThisIndex.reverse().forEach(el => uniqArr.splice(el, 1))
-
-    return uniqArr
+    return 'Only array allowed'
 }
 
 // new Set()
 function uniqElementsInArray2(arg) {
-    return [...new Set(arg)]
+    if (Array.isArray(arr)) {
+        if (arr.length > 0) {
+            return [...new Set(arg)]
+        } else {
+            return 'array is too short'
+        }
+    }
+
+    return 'Only array allowed'
 }
 
 // filter
 function uniqElementsInArray3(arg) {
-    return arg.sort((a, b) => a - b).filter((el, index) => el !== arg[index + 1])
+    if (Array.isArray(arr)) {
+        if (arr.length > 0) {
+            return arg.sort((a, b) => a - b).filter((el, index) => el !== arg[index + 1])
+        } else {
+            return 'array is too short'
+        }
+    }
+
+    return 'Only array allowed'
 }
 
+
 // 6 - Realize function which returns the quantity of odd/even digits in array.
-function oddEvenCount(arg) {
-    let odd = 0
-    let even = 0
+function oddEvenCount(arr) {
+    if (Array.isArray(arr)) {
+        if (arr.length > 0) {
+            let odd = 0
+            let even = 0
 
-    arg.forEach(el => el % 2 === 0 ? even++ : odd++)
+            arr.forEach(el => el % 2 === 0 ? even++ : odd++)
 
-    return 'count of even: ' + even + ', odd: ' + odd
+            return 'count of even: ' + even + ', odd: ' + odd
+        } else {
+            return 'array is too short'
+        }
+    }
+
+    return 'Only array allowed'
 }
 
 // 7 - Return the index of 'a' in the string or the array of indexes. 
-function indexInString(arg) {
-    let index = -1;
-    let result = []
+function indexInString(str, el) {
+    if (typeof str === 'string' && typeof el === 'string') {
+        if (str.length > 0 && el.length > 0) {
+            let index;
+            let result = []
 
-    while ((index = string2.indexOf(arg, index + 1)) != -1) {
-        result.push(index)
+            while ((index = str.indexOf(el, index + 1)) != -1) {
+                result.push(index)
+            }
+
+            return result.length === 0 ? 'not match'
+                : result.length === 1 ? result[0] : result
+        } else {
+            return 'String is too short'
+        }
     }
 
-    return result.length === 0 ? 'not match'
-        : result.length === 1 ? result[0] : result
+    return 'Only strings allowed'
 }
 
 

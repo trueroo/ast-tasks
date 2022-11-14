@@ -1,7 +1,6 @@
 //EASY
 
 // 1 - Write a function to find the min and max elements in the array.
-//check if arr have empty index - but i think its overcoding
 function findMinAndMaxInArray(arr) {
     if (!Array.isArray(arr)) {
         return 'Only arrays allowed'
@@ -11,7 +10,6 @@ function findMinAndMaxInArray(arr) {
 
     //filter array to avoid 'undefined' and non number
     const filteredArr = arr.filter(el => typeof el === 'number')
-
     const sortedArray = filteredArr.sort((a, b) => a - b)
 
     return 'min ' + sortedArray[0] + ' && max ' + sortedArray[sortedArray.length - 1]
@@ -22,11 +20,11 @@ function findMinAndMaxInArray(arr) {
 function sumArray(arr) {
     if (!Array.isArray(arr)) {
         return 'Only array allowed'
-    }
-    if (!arr.length) {
+    } else if (!arr.length) {
         return 'Array have no data to calculate'
     }
 
+    //filter array to avoid 'undefined' and non number
     const filteredArr = arr.filter(el => typeof el === 'number')
 
     let sum = 0;
@@ -42,6 +40,8 @@ function sumArray2(arr) {
     } else if (!arr.length) {
         return 'Array have no data to calculate'
     }
+
+    //filter array to avoid 'undefined' and non number
     const filteredArr = arr.filter(el => typeof el === 'number')
 
     return filteredArr.reduce((a, b) => a + b)
@@ -80,6 +80,7 @@ function uniqElementsInArray(arr) {
         return 'Array is empty'
     }
 
+    //filter only numbers
     const filteredArr = arr.filter(el => typeof el === 'number')
 
     const uniqArr = filteredArr.sort((a, b) => a - b) // sort array for the next changes
@@ -118,6 +119,9 @@ function uniqElementsInArray3(arr) {
     }
 
     const filteredArr = arr.filter(el => typeof el === 'number')
+    if (!filteredArr.length) {
+        return 'No numbers in array'
+    }
 
     return filteredArr.sort((a, b) => a - b).filter((el, index) => el !== filteredArr[index + 1])
 }
@@ -130,8 +134,12 @@ function oddEvenCount(arr) {
     } else if (!arr.length) {
         return 'array is too short'
     }
-
+    //remove non number elements
     const filteredArr = arr.filter(el => typeof el === 'number')
+    if (!filteredArr.length) {
+        return 'No numbers in array'
+    }
+
     let odd = 0
     let even = 0
 
@@ -155,7 +163,7 @@ function indexInString(str, el) {
         result.push(index)
     }
 
-    return result.length === 0 ? 'not match'
+    return result.length === 0 ? 'no matches'
         : result.length === 1 ? result[0] : result
 }
 
@@ -165,6 +173,7 @@ function indexInString(str, el) {
 // 1 - Write a function to archive a string. 
 // Input: aaaadttaggaa 
 // Output: a4d1t2a1g2a2
+//i dont know what to do with spacebars(' ')
 function archiveString(str) {
     if (typeof str !== 'string') {
         return 'Only strings allowed'
@@ -190,6 +199,7 @@ function archiveString(str) {
 // 2.1 - Sort received string by the number of the letters.
 // Input: a4d1t2q3 
 // Output: d, t, q, a
+//i dont know what to do with spacebars(' ')
 function sortString(str) {
     if (typeof str !== 'string') {
         return 'Only strings allowed'
@@ -208,6 +218,7 @@ function sortString(str) {
 // 2 - Write a function to unarchive the string.
 // Input: b3c4r2h6 
 // Output: bbbccccrrhhhhhh
+//i dont know what to do with spacebars(' ')
 function unarchiveString(str) {
     if (typeof str !== 'string') {
         return 'Only strings allowed'
@@ -216,7 +227,11 @@ function unarchiveString(str) {
     }
 
     const resultArr = []
-    const array = str.match(/(\w)(\d+)/g)
+    const array = str.match(/(\w)(\d+)/g) || []
+    if (!array.length) {
+        return 'No data in array'
+    }
+
     array.forEach(el => {
         const letter = el[0]
         let counter = parseInt(el.slice(1))
@@ -230,7 +245,7 @@ function unarchiveString(str) {
 }
 
 // 2.1 Find the letter with max number of repeating in the string.
-// TODO:  if two or more letters - return them all
+// TODO:  upgrade: if two or more letters - return them all + fckn spacebars
 function maxRepeatingLetter(str) {
     if (typeof str !== 'string') {
         return 'Only strings allowed'
@@ -328,7 +343,13 @@ function countVowels(str) {
         return 'String is too short'
     }
 
-    return str.match(/[aeiou]/ig).length
+    const result = str.match(/[aeiou]/ig)
+
+    if (!result.length) {
+        return 'No vowels here'
+    }
+
+    return result
 }
 
 // 5.1 - What vowel was found min times.
@@ -340,18 +361,22 @@ function minRepeatingVowels(str) {
         return 'String is too short'
     }
 
+
     const arrWithVowels = str.match(/[aeiou]/ig)
     const objForCount = {}
 
-    arrWithVowels.forEach(el => {
-        objForCount[el] = 0
-    })
-
-    arrWithVowels.forEach(el => {
-        if (el in objForCount) {
-            objForCount[el]++
-        }
-    })
+    if (!arrWithVowels) {
+        return 'Here is no any vowels'
+    } else {
+        arrWithVowels.forEach(el => {
+            objForCount[el] = 0
+        })
+        arrWithVowels.forEach(el => {
+            if (el in objForCount) {
+                objForCount[el]++
+            }
+        })
+    }
 
     const resultArr = []
     for (let letter in objForCount) {
@@ -371,11 +396,11 @@ function countConsonants(str) {
         return 'String is too short'
     }
 
-    return str.match(/[^aeiou]/ig).length
+    return str.match(/[^aeiou]/ig).length || 'Here is no any consonants'
 }
 
 // 6.1 - What consonant was found max times.
-//TODO:if two or more vowels the same qty
+//TODO:if two or more vowels the same qty && spacebars are consonants =(
 function maxRepeatingConsonant(str) {
     if (typeof str !== 'string') {
         return 'Only strings allowed'
@@ -411,21 +436,22 @@ function maxRepeatingConsonant(str) {
 function leapYear(year) {
     if (typeof year !== 'number') {
         return 'Year must contain only digit(s)'
-    } else if (year < 1) {
-        'Nothing existed until 1 year from the birth of Christ'
+    } else if (year < 0) {
+        return 'Nothing existed until 1 year from the birth of Christ'
     }
 
     return year % 4 === 0
 }
 
 // 7.1 - Write a second function to define the number of days in the month by month and year. For the 2nd task, it is assumed that constant mapping (as object) will be used for all months except Feb. //dont understand what they want. 
+//TODO: first letter of returned month must be uppercase but who cares
 function numOfDaysInMonth(year, month) {
     if (typeof year !== 'number') {
         return 'Year must contain only digit(s)'
     } else if (typeof month !== 'string') {
         return 'Month must contain only letters'
     } else if (year < 1) {
-        'Nothing existed until 1 year from the birth of Christ'
+        'Nothing existed until Jesus was born'
     }
 
     const february = 'february'
@@ -443,7 +469,6 @@ function numOfDaysInMonth(year, month) {
     } else {
         return 'Wrong input month'
     }
-    //TODO: first letter must be uppercase but who cares
 }
 
 // 8 - Write a function to check if the input array is a correct Fibonacci sequence.
@@ -536,7 +561,7 @@ function removeSubstring(strToRemove, str, caseSensetive = false) {
     } else if (!strToRemove.length || !str.length) {
         return 'Need more data'
     } else if (typeof caseSensetive !== 'boolean') {
-        return 'caseSensetive must be true or false'
+        return 'caseSensetive must be boolean'
     } else if (str.toLowerCase().indexOf(strToRemove.toLowerCase()) === -1) {
         return `No "${strToRemove}" here`
     }
@@ -634,7 +659,6 @@ function removeSmthgFromArrKey(arr, remove) {
         }
     })
 
-
     return finalArr
 }
 
@@ -646,7 +670,7 @@ function strToArr(str) {
         return 'String is too short'
     }
 
-    return str.join('')
+    return str.split(' ') //to remove parazite spacebars => str.replace(/\s+/g, ' ').split(' ')
 }
 
 // 12.1 Return the index of the max length string in the array.
@@ -655,17 +679,20 @@ function maxLength(arr) {
         return 'Only arrays allowed'
     }
 
-    //filter array to avoid 'undefined' and non number
-    const filteredArr = arr.filter(el => typeof el === 'number')
+    //filter array to avoid 'undefined' and non string
+    const filteredArr = arr.filter(el => typeof el === 'string')
+    if (!filteredArr.length) {
+        return 'No strings in array'
+    }
 
-    return filteredArr.sort((a, b) => b - a)[0]
+    return filteredArr.sort((a, b) => b.length - a.length)[0]
 }
 
 // 13 - Write a functiom to check if the input numeric parameter is a prime number.
 // num < 0 - alert
 function primeOrNot(num) {
     if (typeof num !== 'number' || num < 1) {
-        return 'Only non-negative numbers allowed and bigger than zero'
+        return 'Only positive numbers allowed'
     } if (num === 1 || num === 2) {
         return "Prime"
     } if (num % 2 === 0) {
@@ -685,7 +712,7 @@ function primeOrNot(num) {
 // 13.1 - Write a functiom to get a sequence of prime numbers to 100.
 function sequenceOfPromeNumbers(num1, num2) {
     if (typeof num1 !== 'number' || typeof num2 !== 'number' || num1 < 1 || num2 < 1) {
-        return 'Only non-negative numbers'
+        return 'Only positive numbers'
     }
 
     const result = []

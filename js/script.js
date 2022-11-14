@@ -74,7 +74,7 @@ function indexOfElement(arr, element) {
 function uniqElementsInArray(arr) {
     if (!Array.isArray(arr)) {
         return 'Only arrays allowed'
-    } else if (arr.length === 1) {
+    } else if (arr.length <= 1) {
         return arr
     } else if (!arr.length) {
         return 'Array is empty'
@@ -96,14 +96,16 @@ function uniqElementsInArray(arr) {
 }
 
 // new Set()
-function uniqElementsInArray2(arg) {
-    if (Array.isArray(arr)) {
+function uniqElementsInArray2(arr) {
+    if (!Array.isArray(arr)) {
         return 'Only arrays allowed'
+    } else if (arr.length <= 1) {
+        return arr
     } else if (!arr.length) {
-        return 'array is too short'
+        return 'Array is empty'
     }
 
-    return [...new Set(arg)]
+    return [...new Set(arr)]
 
 }
 
@@ -185,22 +187,72 @@ function archiveString(str) {
 
     return archiveString.join('')
 }
-// 2.1 - Sort received string by the number of the letters. TODO:
+// 2.1 - Sort received string by the number of the letters.
 // Input: a4d1t2q3 
 // Output: d, t, q, a
 function sortString(str) {
+    if (typeof str !== 'string') {
+        return 'Only strings allowed'
+    } else if (!str.length) {
+        return 'String is too short'
+    }
+
+    //separate by group letter+digit(-s) and sorting
+    const array = str.match(/(\w)(\d+)/g).sort((a, b) => b.slice(1) - a.slice(1))
+    const resultArr = []
+    array.forEach(el => resultArr.push(el[0]))
+
+    return resultArr
 }
 
-// 2 - Write a function to unarchive the string. TODO:
+// 2 - Write a function to unarchive the string.
 // Input: b3c4r2h6 
 // Output: bbbccccrrhhhhhh
 function unarchiveString(str) {
-    const regexp = /(\w)(\d+)/g
-    return array
+    if (typeof str !== 'string') {
+        return 'Only strings allowed'
+    } else if (!str.length) {
+        return 'String is too short'
+    }
+
+    const resultArr = []
+    const array = str.match(/(\w)(\d+)/g)
+    array.forEach(el => {
+        const letter = el[0]
+        let counter = parseInt(el.slice(1))
+        while (counter > 0) {
+            resultArr.push(letter)
+            counter--
+        }
+    })
+
+    return resultArr.join('')
 }
 
-// 2.1 Find the letter with max number of repeating in the string. TODO:
+// 2.1 Find the letter with max number of repeating in the string.
+// TODO:  if two or more letters - return them all
 function maxRepeatingLetter(str) {
+    if (typeof str !== 'string') {
+        return 'Only strings allowed'
+    } else if (!str.length) {
+        return 'String is too short'
+    }
+
+    const uniqSymbolsArr = [...new Set(str)]
+    const uniqSymbolCounterObject = {}
+    uniqSymbolsArr.forEach(el => uniqSymbolCounterObject[el] = 0) //create object for further operations
+
+    //count all symbols
+    str.split('').forEach(el => {
+        if (el in uniqSymbolCounterObject) {
+            uniqSymbolCounterObject[el]++
+        }
+    })
+
+    let resultArr = Object.keys(uniqSymbolCounterObject).map((key) => [key, uniqSymbolCounterObject[key]]);
+    resultArr = resultArr.sort((a, b) => b[1] - a[1])
+
+    return 'Letter "' + resultArr[0][0] + '" is repeating ' + resultArr[0][1] + ' time(-s).'
 }
 
 // 3 - Write a function to check if the 1st input string is a substring of the 2nd input string.
@@ -279,13 +331,36 @@ function countVowels(str) {
     return str.match(/[aeiou]/ig).length
 }
 
-// 5.1 - What vowel was found min times. TODO:
+// 5.1 - What vowel was found min times.
+//TODO:if two or more vowels the same qty
 function minRepeatingVowels(str) {
     if (typeof str !== 'string') {
         return 'Only strings allowed'
     } else if (!str.length) {
         return 'String is too short'
     }
+
+    const arrWithVowels = str.match(/[aeiou]/ig)
+    const objForCount = {}
+
+    arrWithVowels.forEach(el => {
+        objForCount[el] = 0
+    })
+
+    arrWithVowels.forEach(el => {
+        if (el in objForCount) {
+            objForCount[el]++
+        }
+    })
+
+    const resultArr = []
+    for (let letter in objForCount) {
+        resultArr.push([letter, objForCount[letter]])
+    }
+
+    resultArr.sort((a, b) => a[1] - b[1])
+
+    return `"${resultArr[0][0]}" repeat ${resultArr[0][1]} times`
 }
 
 // 6 - Write a function to return the number of consonants in the input string.
@@ -299,8 +374,37 @@ function countConsonants(str) {
     return str.match(/[^aeiou]/ig).length
 }
 
-// 6.1 - What consonant was found max times. TODO:
+// 6.1 - What consonant was found max times.
+//TODO:if two or more vowels the same qty
 function maxRepeatingConsonant(str) {
+    if (typeof str !== 'string') {
+        return 'Only strings allowed'
+    } else if (!str.length) {
+        return 'String is too short'
+    }
+
+    const arrWithVowels = str.match(/[^aeiou]/ig)
+    const objForCount = {}
+
+    arrWithVowels.forEach(el => {
+        objForCount[el] = 0
+    })
+
+    arrWithVowels.forEach(el => {
+        if (el in objForCount) {
+            objForCount[el]++
+        }
+    })
+
+    const resultArr = []
+    for (let letter in objForCount) {
+        resultArr.push([letter, objForCount[letter]])
+    }
+
+    resultArr.sort((a, b) => b[1] - a[1])
+
+    return `"${resultArr[0][0]}" repeat ${resultArr[0][1]} times`
+
 }
 
 // 7 - Write a function to define if the input year is a leap year, in case it is predefined that 2020 is a leap year.
@@ -404,7 +508,7 @@ function factorial2(num) {
 }
 
 // 9.1 - Write a functiom to check if the input parametr is a factorial of any number. 
-//TODO: how to make with recursion
+//TODO: how to make with recursion?
 function checkFactorial(num, limit) {
     if (typeof num !== 'number' || num < 0) {
         return 'Only non-negative numbers'
@@ -630,7 +734,7 @@ function splitArrToSubArr(arr) {
 //    [3, 4, 5],
 //    [8, 2]
 //  ]
-function splitArrBySmthng(arr, separator) { //TODO: last item after separator missed
+function splitArrBySmthng(arr, separator) {
 
     if (!Array.isArray(arr)) {
         return 'Only arrays allowed'
@@ -651,6 +755,9 @@ function splitArrBySmthng(arr, separator) { //TODO: last item after separator mi
             newArr.push(el)
         }
     })
+    if (newArr.length) {
+        result.push(newArr)
+    }
 
     return result
 }
